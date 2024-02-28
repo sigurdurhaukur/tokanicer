@@ -1,0 +1,17 @@
+#version: 0.2 - Trained by `huggingface/tokenizers`
+x t
+. /
+a t
+c e
+d at
+e d
+e xt
+o ce
+p r
+s s
+t xt
+t ext
+dat a
+oce ss
+pr ocess
+process ed
