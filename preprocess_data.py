@@ -78,7 +78,9 @@ def clean_dir(path):
 if __name__ == "__main__":
     print("Collecting all paths...")
     save_dir = "processed_data/"
-    all_paths = collect_all_paths_in_dir("raw_data/", max_paths=100)
+    all_paths = collect_all_paths_in_dir(
+        "raw_data/", max_paths=None
+    )  # full length is 801780
     # all_paths = [
     #     "./raw_data/IGC-News1-22.10.TEI/frettabladid_is/2021/10/IGC-News1-frettabladidis_8501947.xml"
     # ] # for testing
