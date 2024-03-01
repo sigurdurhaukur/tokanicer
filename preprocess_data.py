@@ -1,6 +1,7 @@
 import os
 import xml.etree.ElementTree as ET
 import re
+from tqdm import tqdm
 
 
 class XML_file:
@@ -14,7 +15,6 @@ class XML_file:
 
             extracted_text = []
 
-            # Define the namespace
             namespaces = {"tei": "http://www.tei-c.org/ns/1.0"}
 
             # specific to the IGC-News1-22.10.TEI dataset
@@ -26,7 +26,7 @@ class XML_file:
                     term.text = "<" + term.text.strip() + ">"
                     extracted_text.append(term.text.strip() + " ")
 
-            # Iterate over all <p> elements and collect their text content
+            # iterate over all <p> elements and collect their text content
             for elem in self.root.findall(".//tei:p", namespaces):
                 elem.text = (
                     elem.text.replace("Þessi texti er gefinn út með", "")
@@ -40,35 +40,8 @@ class XML_file:
                 if elem.text is not None and elem.text.strip() != "":
                     extracted_text.append(elem.text + "\n\n")
 
-            # Join all pieces of text into a single string
             extracted_text = "".join(filter(None, extracted_text))
-
             return extracted_text
-
-            # text = []
-            # for elem in self.root.iter():
-            #     inner_text = elem.text
-            #     if inner_text is not None:
-
-            #         inner_text = inner_text.replace(
-            #             'xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" /',
-            #             "",
-            #         )
-
-            #         text.append(inner_text.strip())
-
-            #         # conserve newlines
-            #         if elem.tag == "p":
-            #             text.append("\n")
-
-            # extracted_text = " ".join(text)
-
-            # prescript_len = len(extracted_text.split("      ")[0])
-            # extracted_text = extracted_text[prescript_len:].lstrip()
-
-            # extracted_text += "\n"
-
-            # return extracted_text
         except Exception as e:
             print("Error: " + str(e))
             return ""
@@ -105,7 +78,7 @@ def clean_dir(path):
 if __name__ == "__main__":
     print("Collecting all paths...")
     save_dir = "processed_data/"
-    all_paths = collect_all_paths_in_dir("raw_data/", max_paths=150)
+    all_paths = collect_all_paths_in_dir("raw_data/", max_paths=100)
     # all_paths = [
     #     "./raw_data/IGC-News1-22.10.TEI/frettabladid_is/2021/10/IGC-News1-frettabladidis_8501947.xml"
     # ] # for testing
@@ -118,17 +91,13 @@ if __name__ == "__main__":
         print(f"Created {save_dir}")
 
     print("Processing...")
-    for i, path in enumerate(all_paths):
+    for path in tqdm(all_paths, desc="Processing files", unit="file"):
         try:
             data = XML_file(path).read_xml()
-            new_path = save_dir + str(i) + ".txt"
+            new_path = os.path.join(save_dir, f"{all_paths.index(path)}.txt")
             save(new_path, data)
-
-            print(
-                f"Processed:  {i} / {len(all_paths)} total left: {len(all_paths) - i}"
-            )
         except Exception as e:
-            print("could not process file: " + path)
-            print("Error: " + str(e))
+            print(f"Could not process file: {path}")
+            print(f"Error: {e}")
 
     print("Done!")
