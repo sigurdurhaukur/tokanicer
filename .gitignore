@@ -5,3 +5,4 @@ processed_data/
 
 tokenicer.model
 tokenizer.vocab
+new_tokenizer/
