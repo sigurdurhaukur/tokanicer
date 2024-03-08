@@ -1,4 +1,4 @@
-# tokanicer
+# tokenicer
 
 Tinkering with tokenization and NLP for Icelandic.
 
