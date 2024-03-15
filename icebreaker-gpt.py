@@ -15,8 +15,8 @@ tokanized_train_dataset = load_from_disk("tokanized_train_dataset")
 tokanized_test_dataset = load_from_disk("tokanized_test_dataset")
 
 # shuffle the datasets
-tokanized_train_dataset = tokanized_train_dataset.shuffle()
-tokanized_test_dataset = tokanized_test_dataset.shuffle()
+# tokanized_train_dataset = tokanized_train_dataset.shuffle()
+# tokanized_test_dataset = tokanized_test_dataset.shuffle()
 
 
 scale = 1
