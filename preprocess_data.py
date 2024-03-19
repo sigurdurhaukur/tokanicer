@@ -82,8 +82,8 @@ if __name__ == "__main__":
         "raw_data/", max_paths=None
     )  # full length is 801780
     # all_paths = [
-    #     "./raw_data/IGC-News1-22.10.TEI/frettabladid_is/2021/10/IGC-News1-frettabladidis_8501947.xml"
-    # ] # for testing
+    #     "./raw_data/IGC-News1-22.10.TEI/bylgjan/IGC-News1-bylgjan-22.10.xml"
+    # ]  # for testing
 
     if os.path.exists(save_dir):
         clean_dir(save_dir)

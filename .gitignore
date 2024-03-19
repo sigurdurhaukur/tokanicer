@@ -6,3 +6,10 @@ processed_data/
 tokenicer.model
 tokenizer.vocab
 new_tokenizer/
+
+wandb/
+icebreaker/
+icebreaker-final/
+__pycache__/
+
+**dataset**/
